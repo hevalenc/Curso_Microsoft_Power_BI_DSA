@@ -1,0 +1,9 @@
+**** Exercício 02 ****
+
+** Retorne todos os registros dos funcionários com 2 filhos.
+
+/*COMANDO SQL*/
+
+SELECT * FROM sql_dsa."tb_func" WHERE numero_filhos = '2'
+
+SELECT * FROM sql_dsa."tb_func" WHERE CAST (numero_filhos AS integer) = '2' /*convertendo uma char em integer*/

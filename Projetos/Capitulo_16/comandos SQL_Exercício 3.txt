@@ -1,0 +1,10 @@
+**** Exercício 03 ****
+
+** Retorne a média e salário hora por estado.
+
+/*COMANDO SQL*/
+
+SELECT ROUND (AVG (f.salario_hora)), e.estado
+FROM sql_dsa."tb_func" f, sql_dsa."tb_endereco" e
+WHERE f.id = e.id_func
+GROUP BY e.estado

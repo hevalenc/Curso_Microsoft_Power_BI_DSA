@@ -1,0 +1,57 @@
+SELECT * FROM sql_dsa."tb_func"
+SELECT * FROM sql_dsa."tb_func" LIMIT 5
+SELECT * FROM sql_dsa."tb_func" FETCH FIRST 6 ROWS ONLY
+
+SELECT DISTINCT * FROM sql_dsa."tb_func" /*retorna somente registros únicos*/
+SELECT numero_filhos FROM sql_dsa."tb_func" /*retorna registros de uma tabela*/
+
+SELECT COUNT (*) FROM sql_dsa."tb_func" /*retorna a quantidade de registros*/
+SELECT COUNT (*) FROM sql_dsa."tb_func" WHERE idade = 30
+SELECT COUNT (*) FROM sql_dsa."tb_func" WHERE idade != 30 /*'!=' simbolo de diferente*/
+
+SELECT * FROM sql_dsa."tb_func" WHERE idade = 30 /*'where' pode ser utilizado como filtro*/
+SELECT * FROM sql_dsa."tb_func" WHERE idade >= 30
+SELECT * FROM sql_dsa."tb_func" WHERE idade <= 30
+SELECT * FROM sql_dsa."tb_func" WHERE idade > 30 AND estado_civil = 'solteiro'
+SELECT * FROM sql_dsa."tb_func" WHERE idade > 40 OR estado_civil = 'viuvo'
+SELECT * FROM sql_dsa."tb_func" WHERE idade > 30 AND idade < 50 /*intervalo sem incluir os valores limites*/
+SELECT * FROM sql_dsa."tb_func" WHERE idade BETWEEN 30 AND 50 /*intervalo que inclui os valores limites*/
+
+SELECT * FROM sql_dsa."tb_func" WHERE estado_civil LIKE 'solteiro'/*filtro para valor exato*/
+SELECT * FROM sql_dsa."tb_func" WHERE grau_instrucao LIKE '%medio'/*filtro para valor terminado em ...*/
+SELECT * FROM sql_dsa."tb_func" WHERE grau_instrucao LIKE 'ens%'/*filtro para valor começado com ...*/
+
+SELECT * FROM sql_dsa."tb_func" WHERE idade IN (20, 30, 40, 50) /*verificar os registros em uma condição*/
+
+SELECT * FROM sql_dsa."tb_func" WHERE numero_filhos IS NULL /*verificar registros com valor nulo*/
+SELECT * FROM sql_dsa."tb_func" WHERE numero_filhos IS NOT NULL
+
+UPDATE sql_dsa."tb_func" /*atualizar os registros em uma tabela*/
+SET numero_filhos = null /*configurar uma coluna da tabela invocada com uma variável*/
+WHERE numero_filhos = 'NA'; /*utilizando o filtro para atualizar registros específicos, sem o filtro será atualizado a coluna inteira*/
+COMMIT; /*utilizado para gravar os dados na tabela*/
+SELECT * FROM sql_dsa."tb_func" WHERE numero_filhos IS NULL
+
+TRUNCATE /*apaga os dados de uma tabela*/
+TRUNCATE CASCADE /*apaga os dados de uma tabela e os dados de tabelas associadas para evitar dados relaionados órfãos*/
+
+DELETE FROM sql_dsa."tb_func" /*apagar os registros da tabela*/
+WHERE numero_filhos = 'NA'; /*utiliza o filtro para apagar registros específicos*/
+COMMIT;
+SELECT * FROM sql_dsa."tb_func"
+
+INSERT INTO sql_dsa.tb_func( /*inserir dados na tabela*/
+	"ID", estado_civil, grau_instrucao, numero_filhos, salario_hora, idade, reg_procedencia) /*colunas a serem atualizadas*/
+	VALUES (38, 'casado', 'ensino medio', 3, 4.5, 30, 'capital'); /*os valores devem ser colocados na mesma sequência das colunas*/
+
+SELECT * FROM sql_dsa."tb_func" ORDER BY salario_hora /*ordenar os registros por ordem crescente por padrão*/
+SELECT * FROM sql_dsa."tb_func" ORDER BY salario_hora ASC /*ordenar os registros por ordem ascendente*/
+SELECT * FROM sql_dsa."tb_func" ORDER BY salario_hora DESC /*ordenar os registros por ordem descendente*/
+SELECT * FROM sql_dsa."tb_func" ORDER BY idade, reg_procedencia /*ordenando os registros tendo duas colunas como referência*/
+
+SELECT MIN (salario_hora), MAX (salario_hora), AVG (salario_hora) FROM sql_dsa."tb_func"
+SELECT MIN (salario_hora), MAX (salario_hora), AVG (salario_hora), COUNT (*) FROM sql_dsa."tb_func"
+SELECT MIN (salario_hora), MAX (salario_hora), AVG (salario_hora), SUM (salario_hora) FROM sql_dsa."tb_func"
+
+SELECT AVG (salario_hora), reg_procedencia FROM sql_dsa."tb_func" GROUP BY reg_procedencia /*agrupando registros para consulta composta*/
+SELECT ROUND (AVG (salario_hora)), grau_instrucao FROM sql_dsa."tb_func" GROUP BY grau_instrucao

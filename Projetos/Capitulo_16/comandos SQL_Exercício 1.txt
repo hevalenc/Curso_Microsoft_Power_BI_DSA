@@ -1,0 +1,15 @@
+**** Exercício 01 ****
+
+** Crie uma instrução SQL que retorne a média de idade, número de filhos e grau de instrução dos funcionários cujo salário hora estiver
+** acima da média e todos  os funcionários.
+** Retorne os dados somente de funcionários da capital e estado civil casado, em ordem decrescente da média de idade.
+
+/*COMANDO SQL*/
+
+SELECT ROUND (AVG (idade)), numero_filhos, grau_instrucao
+FROM sql_dsa."tb_func" 
+WHERE reg_procedencia = 'capital'
+	AND estado_civil = 'casado'
+	AND salario_hora > (SELECT AVG (salario_hora) FROM sql_dsa."tb_func")
+GROUP BY numero_filhos, grau_instrucao
+ORDER BY ROUND (AVG (idade)) DESC
